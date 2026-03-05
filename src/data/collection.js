@@ -1,433 +1,433 @@
 const collectionData = {
-  "info": {
-    "_postman_id": "critical-dice-api-v1",
-    "name": "Critical Dice API v1.0",
-    "description": "API para gestionar personajes de D&D y Pathfinder",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
-  "item": [
-    {
-      "name": "Auth",
-      "item": [
-        {
-          "name": "Login (Get Token)",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "const json = pm.response.json();",
-                  "pm.collectionVariables.set(\"api_token\", json.token);"
-                ],
-                "type": "text/javascript"
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"email\": \"admin@criticaldice.com\",\n  \"password\": \"password\",\n  \"deviceName\": \"Postman\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/auth/login",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "login"]
-            }
-          }
-        },
-        {
-          "name": "Logout (Revoke Token)",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/auth/logout",
-              "host": ["{{base_url}}"],
-              "path": ["auth", "logout"]
-            }
-          }
-        }
-      ]
+    info: {
+        _postman_id: "critical-dice-api-v1",
+        name: "Critical Dice API v1.0",
+        description: "API para gestionar personajes de D&D y Pathfinder",
+        schema: "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     },
-    {
-      "name": "Characters CRUD",
-      "item": [
+    item: [
         {
-          "name": "1. List All Characters",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
+            name: "Auth",
+            item: [
+                {
+                    name: "Login (Get Token)",
+                    event: [
+                        {
+                            listen: "test",
+                            script: {
+                                exec: [
+                                    "const json = pm.response.json();",
+                                    'pm.collectionVariables.set("api_token", json.token);',
+                                ],
+                                type: "text/javascript",
+                            },
+                        },
+                    ],
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "email": "admin@criticaldice.com",\n  "password": "password",\n  "deviceName": "Postman"\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/auth/login",
+                            host: ["{{base_url}}"],
+                            path: ["auth", "login"],
+                        },
+                    },
+                },
+                {
+                    name: "Logout (Revoke Token)",
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/auth/logout",
+                            host: ["{{base_url}}"],
+                            path: ["auth", "logout"],
+                        },
+                    },
+                },
             ],
-            "url": {
-              "raw": "{{base_url}}/characters",
-              "host": ["{{base_url}}"],
-              "path": ["characters"]
-            }
-          }
         },
         {
-          "name": "2. Create Character",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
+            name: "Characters CRUD",
+            item: [
+                {
+                    name: "1. List All Characters",
+                    request: {
+                        method: "GET",
+                        header: [
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/characters",
+                            host: ["{{base_url}}"],
+                            path: ["characters"],
+                        },
+                    },
+                },
+                {
+                    name: "2. Create Character",
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "system": "dnd",\n  "playerName": "Test Player",\n  "characterName": "Test Character",\n  "race": "Human",\n  "class": "Fighter",\n  "background": "Soldier",\n  "strength": 15,\n  "dexterity": 12,\n  "constitution": 14,\n  "intelligence": 10,\n  "wisdom": 13,\n  "charisma": 11,\n  "appliedModifiers": "None"\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/characters",
+                            host: ["{{base_url}}"],
+                            path: ["characters"],
+                        },
+                    },
+                },
+                {
+                    name: "3. Get Single Character",
+                    request: {
+                        method: "GET",
+                        header: [
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/characters/{{last_character_id}}",
+                            host: ["{{base_url}}"],
+                            path: ["characters", "{{last_character_id}}"],
+                        },
+                    },
+                },
+                {
+                    name: "4. Update Character",
+                    request: {
+                        method: "PATCH",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "characterName": "Updated Character",\n  "strength": 18\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/characters/{{last_character_id}}",
+                            host: ["{{base_url}}"],
+                            path: ["characters", "{{last_character_id}}"],
+                        },
+                    },
+                },
+                {
+                    name: "5. Delete Character",
+                    request: {
+                        method: "DELETE",
+                        header: [
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/characters/{{last_character_id}}",
+                            host: ["{{base_url}}"],
+                            path: ["characters", "{{last_character_id}}"],
+                        },
+                    },
+                },
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"system\": \"dnd\",\n  \"playerName\": \"Test Player\",\n  \"characterName\": \"Test Character\",\n  \"race\": \"Human\",\n  \"class\": \"Fighter\",\n  \"background\": \"Soldier\",\n  \"strength\": 15,\n  \"dexterity\": 12,\n  \"constitution\": 14,\n  \"intelligence\": 10,\n  \"wisdom\": 13,\n  \"charisma\": 11,\n  \"appliedModifiers\": \"None\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/characters",
-              "host": ["{{base_url}}"],
-              "path": ["characters"]
-            }
-          }
         },
         {
-          "name": "3. Get Single Character",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
+            name: "Users CRUD",
+            item: [
+                {
+                    name: "1. List All Users",
+                    request: {
+                        method: "GET",
+                        header: [
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/users",
+                            host: ["{{base_url}}"],
+                            path: ["users"],
+                        },
+                    },
+                },
+                {
+                    name: "2. Create User",
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "name": "New User",\n  "email": "new.user@example.com",\n  "password": "password123",\n  "is_admin": false\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/users",
+                            host: ["{{base_url}}"],
+                            path: ["users"],
+                        },
+                    },
+                },
+                {
+                    name: "3. Get Single User",
+                    request: {
+                        method: "GET",
+                        header: [
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/users/{{last_user_id}}",
+                            host: ["{{base_url}}"],
+                            path: ["users", "{{last_user_id}}"],
+                        },
+                    },
+                },
+                {
+                    name: "4. Update User",
+                    request: {
+                        method: "PATCH",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "name": "Updated User"\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/users/{{last_user_id}}",
+                            host: ["{{base_url}}"],
+                            path: ["users", "{{last_user_id}}"],
+                        },
+                    },
+                },
+                {
+                    name: "5. Delete User",
+                    request: {
+                        method: "DELETE",
+                        header: [
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/users/{{last_user_id}}",
+                            host: ["{{base_url}}"],
+                            path: ["users", "{{last_user_id}}"],
+                        },
+                    },
+                },
             ],
-            "url": {
-              "raw": "{{base_url}}/characters/{{last_character_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["characters", "{{last_character_id}}"]
-            }
-          }
         },
         {
-          "name": "4. Update Character",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
+            name: "Error Cases",
+            item: [
+                {
+                    name: "E1. Missing Required Fields",
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "playerName": "Test"\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/characters",
+                            host: ["{{base_url}}"],
+                            path: ["characters"],
+                        },
+                    },
+                },
+                {
+                    name: "E2. Invalid Attributes Range",
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "system": "dnd",\n  "playerName": "Test Player",\n  "characterName": "Test",\n  "race": "Human",\n  "class": "Fighter",\n  "background": "Soldier",\n  "strength": 25,\n  "dexterity": 12,\n  "constitution": 14,\n  "intelligence": 10,\n  "wisdom": 13,\n  "charisma": 11\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/characters",
+                            host: ["{{base_url}}"],
+                            path: ["characters"],
+                        },
+                    },
+                },
+                {
+                    name: "E3. Invalid System",
+                    request: {
+                        method: "POST",
+                        header: [
+                            {
+                                key: "Content-Type",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        body: {
+                            mode: "raw",
+                            raw: '{\n  "system": "invalid",\n  "playerName": "Test",\n  "characterName": "Test",\n  "race": "Human",\n  "class": "Fighter",\n  "background": "Soldier",\n  "strength": 15,\n  "dexterity": 14,\n  "constitution": 13,\n  "intelligence": 12,\n  "wisdom": 11,\n  "charisma": 10\n}',
+                        },
+                        url: {
+                            raw: "{{base_url}}/characters",
+                            host: ["{{base_url}}"],
+                            path: ["characters"],
+                        },
+                    },
+                },
+                {
+                    name: "E4. Without Authentication",
+                    request: {
+                        method: "GET",
+                        header: [
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/characters",
+                            host: ["{{base_url}}"],
+                            path: ["characters"],
+                        },
+                    },
+                },
+                {
+                    name: "E5. Non-existent Character",
+                    request: {
+                        method: "GET",
+                        header: [
+                            {
+                                key: "Accept",
+                                value: "application/json",
+                            },
+                            {
+                                key: "Authorization",
+                                value: "Bearer {{api_token}}",
+                            },
+                        ],
+                        url: {
+                            raw: "{{base_url}}/characters/99999",
+                            host: ["{{base_url}}"],
+                            path: ["characters", "99999"],
+                        },
+                    },
+                },
             ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"characterName\": \"Updated Character\",\n  \"strength\": 18\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/characters/{{last_character_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["characters", "{{last_character_id}}"]
-            }
-          }
+        },
+    ],
+    variable: [
+        {
+            key: "base_url",
+            value: "http://localhost:8000/api/v1",
+            type: "string",
         },
         {
-          "name": "5. Delete Character",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/characters/{{last_character_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["characters", "{{last_character_id}}"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Users CRUD",
-      "item": [
-        {
-          "name": "1. List All Users",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/users",
-              "host": ["{{base_url}}"],
-              "path": ["users"]
-            }
-          }
+            key: "api_token",
+            value: "",
+            type: "string",
         },
-        {
-          "name": "2. Create User",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"New User\",\n  \"email\": \"new.user@example.com\",\n  \"password\": \"password123\",\n  \"is_admin\": false\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/users",
-              "host": ["{{base_url}}"],
-              "path": ["users"]
-            }
-          }
-        },
-        {
-          "name": "3. Get Single User",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/users/{{last_user_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["users", "{{last_user_id}}"]
-            }
-          }
-        },
-        {
-          "name": "4. Update User",
-          "request": {
-            "method": "PATCH",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"name\": \"Updated User\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/users/{{last_user_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["users", "{{last_user_id}}"]
-            }
-          }
-        },
-        {
-          "name": "5. Delete User",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/users/{{last_user_id}}",
-              "host": ["{{base_url}}"],
-              "path": ["users", "{{last_user_id}}"]
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "Error Cases",
-      "item": [
-        {
-          "name": "E1. Missing Required Fields",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"playerName\": \"Test\"\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/characters",
-              "host": ["{{base_url}}"],
-              "path": ["characters"]
-            }
-          }
-        },
-        {
-          "name": "E2. Invalid Attributes Range",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"system\": \"dnd\",\n  \"playerName\": \"Test Player\",\n  \"characterName\": \"Test\",\n  \"race\": \"Human\",\n  \"class\": \"Fighter\",\n  \"background\": \"Soldier\",\n  \"strength\": 25,\n  \"dexterity\": 12,\n  \"constitution\": 14,\n  \"intelligence\": 10,\n  \"wisdom\": 13,\n  \"charisma\": 11\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/characters",
-              "host": ["{{base_url}}"],
-              "path": ["characters"]
-            }
-          }
-        },
-        {
-          "name": "E3. Invalid System",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"system\": \"invalid\",\n  \"playerName\": \"Test\",\n  \"characterName\": \"Test\",\n  \"race\": \"Human\",\n  \"class\": \"Fighter\",\n  \"background\": \"Soldier\",\n  \"strength\": 15,\n  \"dexterity\": 14,\n  \"constitution\": 13,\n  \"intelligence\": 12,\n  \"wisdom\": 11,\n  \"charisma\": 10\n}"
-            },
-            "url": {
-              "raw": "{{base_url}}/characters",
-              "host": ["{{base_url}}"],
-              "path": ["characters"]
-            }
-          }
-        },
-        {
-          "name": "E4. Without Authentication",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/characters",
-              "host": ["{{base_url}}"],
-              "path": ["characters"]
-            }
-          }
-        },
-        {
-          "name": "E5. Non-existent Character",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              },
-              {
-                "key": "Authorization",
-                "value": "Bearer {{api_token}}"
-              }
-            ],
-            "url": {
-              "raw": "{{base_url}}/characters/99999",
-              "host": ["{{base_url}}"],
-              "path": ["characters", "99999"]
-            }
-          }
-        }
-      ]
-    }
-  ],
-  "variable": [
-    {
-      "key": "base_url",
-      "value": "http://localhost:8000/api/v1",
-      "type": "string"
-    },
-    {
-      "key": "api_token",
-      "value": "",
-      "type": "string"
-    }
-  ]
-}
+    ],
+};
 
-export default collectionData
+export default collectionData;

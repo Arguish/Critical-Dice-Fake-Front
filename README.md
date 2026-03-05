@@ -68,10 +68,12 @@ src/
 ## Endpoints Disponibles
 
 ### Authentication
+
 - Login (Get Token)
 - Logout (Revoke Token)
 
 ### Characters CRUD
+
 - List All Characters
 - Create Character
 - Get Single Character
@@ -79,6 +81,7 @@ src/
 - Delete Character
 
 ### Users CRUD
+
 - List All Users
 - Create User
 - Get Single User
@@ -86,6 +89,7 @@ src/
 - Delete User
 
 ### Error Cases
+
 - Missing Required Fields
 - Invalid Attributes Range
 - Invalid System
